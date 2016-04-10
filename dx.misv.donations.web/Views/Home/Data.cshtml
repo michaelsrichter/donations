@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Data";
+}
+
+<h2>Sample Data Used</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            The image below shows the data that is being used to build the Donations predictive model. This is historical data about previous donations. We took 75% of our available data and used it for training the model.
+            For each record, we see the donators' demographic data (Income, Zip code, etc) and some environmental factors (Device, Hour). These are the <strong>features</strong>. We also see the donation amount which is the <strong>label</strong>.
+            The model uses an algorithm to detect the relationships among the features and how they impact what the label is. 
+        </p>
+        <p>
+            Once the model understands what features in the data influence the label, we can test it with the remaining 25%. That is the scored label in the image below. You can see that it's pretty close the actual label (the donation amount).
+        </p>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <figure class="figure">
+            <img src="/Content/data.png" class="img-responsive figure-img img-fluid img-rounded" alt="the data">
+            <figcaption class="figure-caption">The Data</figcaption>
+        </figure>
+    </div>
+</div>

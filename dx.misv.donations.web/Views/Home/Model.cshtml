@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Model";
+}
+
+<h2>The Machine Learning Model</h2>
+<div class="row">
+    <div class="col-lg-6">
+        <p>
+            Below is the model that we use to make our donation predictions. The Reader gets our historic and environmental data.
+            The relevant columns are identified and categorized. When the data is ready, it is split; 75% goes to training the model, 25% will be held back to
+            score the model later. We chose a "Linear Regression" algorithm since we want the model to predict a value for us (the donation amount).
+        </p>
+        <p>
+            The algorithm gets applied to the data, learning about it; finding patterns that
+            help it understand how people have donated in the past so that it can accurately guess how people will guess in the future.
+        </p>
+        <p>
+            Once the algorithm is complete, it creates a model for donation predictions. But how accurate is that model? We score it against the 25% of the data we held back.
+            For each record in that 25% test set, the model tries to
+            predict what the donation is (based on income, zip code, gender, etc.).See how the @Html.ActionLink("guesses compare to the actual donations", "Data"). Once the held
+            back data is scored, we can see how our model performed. See the <strong>Model Evaluation</strong> figure. The errors represent a value that indicates how far, on average, the predictions
+            are from the actual values. The Coefficient of Determination is an indicator of the accuracy of the model. In this case it's about 98% accurate.
+        </p>
+        <p>
+            Azure helps us take this one step further by exposing this model as an API that we can use to build into our applications. In this example, we submit a
+            sample donator defined by a collection of demographic data and environmental data. The service uses the underlying model to predict what a person with
+            this demographic profile would donate.
+        </p>
+    </div>
+    <div class="col-lg-6">
+        <figure class="figure">
+            <img src="/Content/evaluate.png" class="img-responsive figure-img img-fluid img-rounded" alt="model evaluation.">
+            <figcaption class="figure-caption">Model Evaluation</figcaption>
+        </figure>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <figure class="figure">
+            <img src="/Content/model.png" class="img-responsive figure-img img-fluid img-rounded" alt="the predictive model.">
+            <figcaption class="figure-caption">The Predictive Model</figcaption>
+        </figure>
+    </div>
+</div>

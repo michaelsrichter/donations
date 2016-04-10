@@ -1,0 +1,75 @@
+﻿@model dx.misv.donations.web.Services.DonationExperienceValues
+@{
+    ViewBag.Title = "Suggestions";
+}
+
+<h2>Donation Experience</h2>
+<div class="row">
+
+    @if (Model.Success)
+    {
+        <div class="col-lg-6">
+            <form class="form-horizontal">
+                <fieldset>
+                    <legend>Make a Donation</legend>
+                    <div class="form-group">
+                        <label for="Suggested" class="col-lg-4 control-label">Suggestions</label>
+                        <div class="col-lg-8">
+                            @foreach (var v in Model.Values)
+                            {
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="Suggested" id="Suggested" value="@v">
+                                        @($"{v:C}")
+                                    </label>
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Choice" class="col-lg-4 control-label">Enter Amount</label>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="Choice" id="Choice" placeholder="$100">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-lg-8 col-lg-offset-4">
+                            <button disabled="disabled" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+
+            <div style="color: grey; font-style: italic; padding-top: 100px;">
+                <p>
+                    Score = @Model.Score
+                </p>
+                <p>
+                    Multipler = @Model.ExperienceSettings.Multiplier
+                </p>
+                <p>
+                    Count = @Model.ExperienceSettings.SuggestionCount
+                </p>
+                <p>
+                    Request Time = @Model.RequestTime.Milliseconds ms
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <p>Based on the sample donator you created, these are the choices we think that sample donator will be interested in. </p>
+            <p>
+                Based on previous donations from donators that have similar demographics, the model predicted your sample donator would give a <strong>$@Model.Score</strong> donation.
+            The app cleaned up and rounded that score and used it as the basis for the choices presented to the donator.</p>
+        </div>
+    }
+    else
+    {
+        <h3>There was an error</h3>
+        <p>
+            @Model.Message
+        </p>
+    }
+</div>
+

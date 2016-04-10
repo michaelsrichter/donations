@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Donation Predictions</h1>
+    <p class="lead">Use <a target="_blank" href="https://azure.microsoft.com/en-us/services/machine-learning/">Azure Machine Learning</a> to predict donations and provide a better donating experience!</p>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <p>
+            Create a sample donator with this form. Choose data that represents your sample donator.
+        </p>
+        <p>
+            When you submit the form, the donator you created will be submitted to an Azure Machine Learning model. The model
+            will make a prediction about how much this sample donator will be willing to donate (based on how donators with similar backgrounds have donated before). This web app
+            will use this prediction to give the donator a more targeted set of donation request options.
+        </p>
+        <p>@Html.ActionLink("Learn more about the data used for predictions.", "Data")</p>
+        <p>@Html.ActionLink("Learn more about the predictive model.", "Model")</p>
+        <p><a target="_blank" href="https://azure.microsoft.com/en-us/services/machine-learning/">Learn more about Azure Machine Learning</a></p>
+    </div>
+    <div class="col-lg-9">
+        <form class="form-horizontal" method="post">
+            <fieldset>
+                <legend>Donator Sample</legend>
+                <div class="form-group">
+                    <label for="Age" class="col-lg-4 control-label">Age</label>
+                    <div class="col-lg-8">
+                        <input type="text" name="Age" class="form-control" id="Age" placeholder="18">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Income" class="col-lg-4 control-label">Income</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="Income" id="Income" placeholder="30000 (no commas)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Zip" class="col-lg-4 control-label">Zip Code</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="Zip" id="Zip">
+                            @foreach (var zip in ViewBag.Zips)
+                            {
+                                <option value="@zip.Zip">@zip.Zip (avg. income = @string.Format("{0:C}", zip.Income))</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Gender</label>
+                    <div class="col-lg-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Sex" id="GenderMale" value="M" checked="">
+                                Male
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="Sex" id="GenderFemale" value="F">
+                                Female
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-4 control-label">Marital Status</label>
+                    <div class="col-lg-8">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="MaritalStatus" id="Single" value="Single" checked="">
+                                Single
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="MaritalStatus" id="Married" value="Married">
+                                Married
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="MaritalStatus" id="Divorced" value="Divorced">
+                                Divorced
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Education" class="col-lg-4 control-label">Education</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="Education" id="Education">
+                            <option value="H">High School</option>
+                            <option value="C">College</option>
+                            <option value="G">Graduate Degree</option>
+                            <option value="P">Phd</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Children" class="col-lg-4 control-label">Children</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="Children" id="Children">
+                            <option>0</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Interactions" class="col-lg-4 control-label">Hours Listened Per Week</label>
+                    <div class="col-lg-8">
+                        <input type="text" class="form-control" name="Interactions" id="Interactions" placeholder="10">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Device" class="col-lg-4 control-label">Device</label>
+                    <div class="col-lg-8">
+                        <select class="form-control" name="Device" id="Device">
+                            <option>Website</option>
+                            <option>Mobile Web</option>
+                            <option>Mobile App</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <button type="reset" class="btn btn-default">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </fieldset>
+            <input type="hidden" name="Amount" value="0" />
+            <input type="hidden" name="WeekDay" value="@((int) DateTime.Now.DayOfWeek + 1)" />
+            <input type="hidden" name="Month" value="@DateTime.Now.Month" />
+            <input type="hidden" name="Hour" value="@DateTime.Now.Hour" />
+            <input type="hidden" name="Location" value="0" />
+            <input type="hidden" name="Profile" value="Web" />
+        </form>
+    </div>
+</div>
